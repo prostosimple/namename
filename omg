@@ -1,0 +1,47 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# Отправляем GET-запрос на страницу
+response = requests.get('https://www.example.com')
+
+# Парсим HTML-код с помощью BeautifulSoup
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Находим все элементы <a> с классом "link"
+links = soup.find_all('a', class_='link')
+
+# Список для хранения текста ссылок
+link_texts = []
+
+# Получаем текст каждой ссылки и добавляем его в список
+for link in links:
+    link_texts.append(link.text)
+
+# Создаем DataFrame из списка текстов ссылок
+df = pd.DataFrame({'Link Text': link_texts})
+
+# Сохраняем DataFrame в CSV-файл
+df.to_csv('links.csv', index=False)
+
+# Выводим сообщение об успешном сохранении
+print('Ссылки сохранены в файл links.csv')
+
+# Функция для расчета суммы двух чисел
+def add_numbers(a, b):
+    return a + b
+
+# Вызываем функцию add_numbers и выводим результат
+result = add_numbers(5, 10)
+print('Результат сложения:', result)
+
+# Класс "Person" для представления человека
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def say_hello(self):
+        print('Привет, меня зовут', self.name, 'и мне', self.age, 'лет.')
+
+# Создаем эк
